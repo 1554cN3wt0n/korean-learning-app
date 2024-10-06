@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "lets-learn-korean",
+    "public": "dist/korean-learning-app/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
