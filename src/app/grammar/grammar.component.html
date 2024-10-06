@@ -1,15 +1,17 @@
 <div *ngIf="!this.loading">
   <div class="p-1 m-4">
     <div class="text-xl text-bold">
-      Reviewed: {{ this.sentencesData.length - this.randomIdxs.length }}/{{
-        this.sentencesData.length
+      Reviewed: {{ this.grammarList.length - this.randomIdxs.length }}/{{
+        this.grammarList.length
       }}
     </div>
     <div class="p-2">
       <app-flip-card
         #card
-        [front]="this.sentencesData[idx][1]"
-        [back]="this.sentencesData[idx][3]"
+        [front]="this.grammarList[idx][2]"
+        [frontDetail]="'Example: ' + this.grammarList[idx][4]"
+        [back]="this.grammarList[idx][3]"
+        [backDetail]="'Example: ' + this.grammarList[idx][5]"
       ></app-flip-card>
     </div>
     <div class="p-4 grid grid-cols-2 gap-4 h-[100px]">
@@ -22,6 +24,6 @@
     </div>
   </div>
   <div class="p-2">
-    <a href="https://tatoeba.org/ja/">Source</a>
+    <a href="https://learning-korean.com">Source</a>
   </div>
 </div>

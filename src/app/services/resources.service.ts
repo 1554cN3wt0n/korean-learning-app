@@ -27,9 +27,30 @@ export class ResourcesService {
     }
   }
 
-  async getWords(): Promise<any> {
+  async getWords(level: string = 'beginner'): Promise<any> {
     try {
-      const response = await fetch('/assets/words.csv');
+      const response = await fetch(`/assets/words-${level}.csv`);
+
+      // Check if the request was successful
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Get the CSV as text
+      const csvText = await response.text();
+
+      // Parse the CSV
+      const parsedData = this.parseCSV(csvText, ',');
+
+      return parsedData;
+    } catch (error) {
+      console.error('Error fetching or parsing CSV: ', error);
+    }
+  }
+
+  async getGrammar(level: string = 'beginner'): Promise<any> {
+    try {
+      const response = await fetch(`/assets/grammar-${level}.csv`);
 
       // Check if the request was successful
       if (!response.ok) {

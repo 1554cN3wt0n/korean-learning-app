@@ -42,4 +42,8 @@ export class AppComponent {
     this.router.navigate(['/sentences']);
     this.drawer.toggle();
   }
+  goToGrammar() {
+    this.router.navigate(['/grammar']);
+    this.drawer.toggle();
+  }
 }

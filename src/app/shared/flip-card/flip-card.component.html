@@ -9,9 +9,10 @@
       <!-- Front Side of the Card -->
       <div class="absolute inset-0 rounded-lg shadow-lg backface-hidden">
         <mat-card class="w-full h-full flex justify-center items-center">
-          <mat-card-title>한국어</mat-card-title>
-          <mat-card-content>
+          <mat-card-title>{{ frontTitle }}</mat-card-title>
+          <mat-card-content class="w-full">
             <p class="p-[5%] text-2xl">{{ front }}</p>
+            <p>{{ frontDetail }}</p>
           </mat-card-content>
         </mat-card>
       </div>
@@ -21,9 +22,10 @@
         class="absolute inset-0 rounded-lg shadow-lg rotate-y-180 backface-hidden"
       >
         <mat-card class="w-full h-full flex justify-center items-center">
-          <mat-card-title>English</mat-card-title>
-          <mat-card-content>
+          <mat-card-title>{{ backTitle }}</mat-card-title>
+          <mat-card-content class="w-full">
             <p class="p-[5%] text-2xl">{{ back }}</p>
+            <p>{{ backDetail }}</p>
           </mat-card-content>
         </mat-card>
       </div>
