@@ -1,0 +1,27 @@
+<mat-drawer-container class="h-full w-full" [hasBackdrop]="true">
+  <mat-drawer #drawer [mode]="'over'">
+    <h2 class="p-4 text-bold">List</h2>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <button class="w-full p-4 list-button" (click)="goToSentences()">
+          Sentences
+        </button>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <button class="w-full p-4 list-button" (click)="goToVocabulary()">
+          Vocabulary
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="w-full h-[10%] bg-slate-500">
+      <button class="p-2 ml-4 h-full bg-slate-500" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div>
+      <router-outlet />
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

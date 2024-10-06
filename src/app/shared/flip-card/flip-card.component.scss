@@ -1,0 +1,20 @@
+/* Ensure 3D perspective */
+.perspective {
+    perspective: 1000px;
+  }
+  
+  /* Preserve 3D space for child elements */
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  /* Hide backface of elements */
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  /* Rotate the back of the card */
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+  

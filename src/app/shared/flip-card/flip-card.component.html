@@ -1,0 +1,32 @@
+<div class="flex justify-center items-center">
+  <div class="group perspective">
+    <!-- Card Container -->
+    <div
+      class="relative w-64 h-96 sm:w-72 sm:h-80 lg:w-96 lg:h-128 transform-style-preserve-3d transition-transform duration-500"
+      [class.rotate-y-180]="isFlipped"
+      (click)="flipCard()"
+    >
+      <!-- Front Side of the Card -->
+      <div class="absolute inset-0 rounded-lg shadow-lg backface-hidden">
+        <mat-card class="w-full h-full flex justify-center items-center">
+          <mat-card-title>한국어</mat-card-title>
+          <mat-card-content>
+            <p class="p-[5%] text-2xl">{{ front }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Back Side of the Card -->
+      <div
+        class="absolute inset-0 rounded-lg shadow-lg rotate-y-180 backface-hidden"
+      >
+        <mat-card class="w-full h-full flex justify-center items-center">
+          <mat-card-title>English</mat-card-title>
+          <mat-card-content>
+            <p class="p-[5%] text-2xl">{{ back }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
