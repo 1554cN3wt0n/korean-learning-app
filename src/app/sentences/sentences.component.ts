@@ -3,6 +3,7 @@ import { ResourcesService } from '../services/resources.service';
 import { FlipCardComponent } from '../shared/flip-card/flip-card.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-sentences',
@@ -20,7 +21,10 @@ export class SentencesComponent {
   completedSentences = 0;
   @ViewChild('card') card!: FlipCardComponent;
 
-  constructor(private resourcesService: ResourcesService) {}
+  constructor(
+    private resourcesService: ResourcesService,
+    private utilsService: UtilsService
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -28,7 +32,9 @@ export class SentencesComponent {
       .getSentences()
       .then((data) => {
         this.sentencesData = data;
-        this.randomIdxs = this.createAndShuffleArray(this.sentencesData.length);
+        this.randomIdxs = this.utilsService.createAndShuffleArray(
+          this.sentencesData.length
+        );
         this.idx = this.randomIdxs.pop() || 0;
         this.loading = false;
       })
@@ -47,17 +53,5 @@ export class SentencesComponent {
     let prevIdx = this.idx;
     this.idx = this.randomIdxs.pop() || 0;
     this.randomIdxs.push(prevIdx);
-  }
-
-  createAndShuffleArray(n: number): number[] {
-    const array = Array.from({ length: n }, (_, index) => index);
-
-    // Shuffle the array
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-    }
-
-    return array;
   }
 }

@@ -27,13 +27,34 @@ export class ResourcesService {
     }
   }
 
+  async getWords(): Promise<any> {
+    try {
+      const response = await fetch('/assets/words.csv');
+
+      // Check if the request was successful
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Get the CSV as text
+      const csvText = await response.text();
+
+      // Parse the CSV
+      const parsedData = this.parseCSV(csvText, ',');
+
+      return parsedData;
+    } catch (error) {
+      console.error('Error fetching or parsing CSV: ', error);
+    }
+  }
+
   // Basic CSV parser function (no external library needed)
-  parseCSV(csvText: string): Array<string[]> {
+  parseCSV(csvText: string, delimeter: string = '\t'): Array<string[]> {
     // Split by new line to get rows
     const rows = csvText.split('\n');
 
     // Split each row by comma to get individual values (columns)
-    const data = rows.map((row) => row.split('\t'));
+    const data = rows.map((row) => row.split(delimeter));
 
     return data;
   }

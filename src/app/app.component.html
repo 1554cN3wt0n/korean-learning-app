@@ -1,6 +1,12 @@
 <mat-drawer-container class="h-full w-full" [hasBackdrop]="true">
   <mat-drawer #drawer [mode]="'over'">
-    <h2 class="p-4 text-bold">List</h2>
+    <button
+      class="p-4 text-bold flex justify-center items-center gap-2"
+      href="/"
+      (click)="goHome()"
+    >
+      <mat-icon>home</mat-icon><span>Home</span>
+    </button>
     <mat-list role="list">
       <mat-list-item role="listitem">
         <button class="w-full p-4 list-button" (click)="goToSentences()">

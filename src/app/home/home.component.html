@@ -1,1 +1,19 @@
-<p>home works!</p>
+<div class="w-full h-screen flex justify-center">
+  <div class="absolute pt-[5%] flex justify-center items-center">
+    <img class="w-[50%] border rounded-lg shadow-lg" src="/assets/flag.svg" />
+  </div>
+  <div class="absolute pt-[45%]">
+    <div class="wave-text">
+      <span
+        *ngFor="let letter of letters; let i = index"
+        class="wave-letter text-8xl"
+        [style.animationDelay]="getDelay(i)"
+      >
+        {{ letter }}
+      </span>
+    </div>
+  </div>
+  <div class="absolute pt-[65%]">
+    <h1>Let's start learning Korean Together!</h1>
+  </div>
+</div>

@@ -29,6 +29,11 @@ export class AppComponent {
 
   constructor(private router: Router) {}
 
+  goHome() {
+    this.router.navigate(['/']);
+    this.drawer.toggle();
+  }
+
   goToVocabulary() {
     this.router.navigate(['/vocabulary']);
     this.drawer.toggle();
