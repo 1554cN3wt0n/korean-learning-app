@@ -1,56 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
-import { FlipCardComponent } from '../shared/flip-card/flip-card.component';
-import { ResourcesService } from '../services/resources.service';
-import { UtilsService } from '../services/utils.service';
-import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vocabulary',
   standalone: true,
-  imports: [FlipCardComponent, MatIconModule, CommonModule],
+  imports: [],
   templateUrl: './vocabulary.component.html',
   styleUrl: './vocabulary.component.scss',
 })
 export class VocabularyComponent {
-  listWords!: any[][];
-  randomIdxs!: number[];
-  idx!: number;
-  loading!: boolean;
-
-  @ViewChild('card') card!: FlipCardComponent;
-
-  constructor(
-    private resourcesService: ResourcesService,
-    private utilsService: UtilsService
-  ) {}
-
-  ngOnInit() {
-    this.loading = true;
-    this.resourcesService
-      .getWords()
-      .then((data) => {
-        this.listWords = data;
-        this.randomIdxs = this.utilsService.createAndShuffleArray(
-          this.listWords.length
-        );
-        this.idx = this.randomIdxs.pop() || 0;
-        this.loading = false;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  constructor(private router: Router) {}
+  goToFlashcards() {
+    this.router.navigate(['vocabulary/flashcards']);
   }
-
-  nextSentence() {
-    this.card.isFlipped = false;
-    this.idx = this.randomIdxs.pop() || 0;
-  }
-
-  reviewLater() {
-    this.card.isFlipped = false;
-    let prevIdx = this.idx;
-    this.idx = this.randomIdxs.pop() || 0;
-    this.randomIdxs.push(prevIdx);
+  goToQuiz() {
+    this.router.navigate(['vocabulary/quiz']);
   }
 }
