@@ -4,9 +4,17 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ResourcesService {
+  words: any[] = [];
+  grammars: any[] = [];
+  sentences: any[] = [];
+
   constructor() {}
 
   async getSentences(): Promise<any> {
+    if (this.sentences.length > 0) {
+      return this.sentences;
+    }
+
     try {
       const response = await fetch('/assets/sentences.tsv');
 
@@ -21,6 +29,7 @@ export class ResourcesService {
       // Parse the CSV
       const parsedData = this.parseCSV(csvText);
 
+      this.sentences = parsedData;
       return parsedData;
     } catch (error) {
       console.error('Error fetching or parsing CSV: ', error);
@@ -28,6 +37,9 @@ export class ResourcesService {
   }
 
   async getWords(level: string = 'beginner'): Promise<any> {
+    if (this.words.length > 0) {
+      return this.words;
+    }
     try {
       const response = await fetch(`/assets/words-${level}.csv`);
 
@@ -42,6 +54,8 @@ export class ResourcesService {
       // Parse the CSV
       const parsedData = this.parseCSV(csvText, ',');
 
+      this.words = parsedData;
+
       return parsedData;
     } catch (error) {
       console.error('Error fetching or parsing CSV: ', error);
@@ -49,6 +63,10 @@ export class ResourcesService {
   }
 
   async getGrammar(level: string = 'beginner'): Promise<any> {
+    if (this.grammars.length > 0) {
+      return this.grammars;
+    }
+
     try {
       const response = await fetch(`/assets/grammar-${level}.csv`);
 
@@ -62,6 +80,8 @@ export class ResourcesService {
 
       // Parse the CSV
       const parsedData = this.parseCSV(csvText, ',');
+
+      this.grammars = parsedData;
 
       return parsedData;
     } catch (error) {

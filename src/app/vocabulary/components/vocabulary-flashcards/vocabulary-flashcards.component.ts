@@ -17,6 +17,7 @@ export class VocabularyFlashcardsComponent {
   randomIdxs!: number[];
   idx!: number;
   loading!: boolean;
+  numOfWords: number = 20;
 
   @ViewChild('card') card!: FlipCardComponent;
 
@@ -29,8 +30,12 @@ export class VocabularyFlashcardsComponent {
     this.loading = true;
     this.resourcesService
       .getWords()
-      .then((data) => {
-        this.listWords = data;
+      .then((data: any[]) => {
+        this.listWords = [];
+        for (let i = 0; i < this.numOfWords; i++) {
+          let j = Math.floor(Math.random() * data.length);
+          this.listWords.push(data.splice(j, 1)[0]);
+        }
         this.randomIdxs = this.utilsService.createAndShuffleArray(
           this.listWords.length
         );

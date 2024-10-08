@@ -17,6 +17,7 @@ export class GrammarFlashcardsComponent {
   randomIdxs!: number[];
   idx!: number;
   loading: boolean = true;
+  numOfWords: number = 20;
 
   completedSentences = 0;
   @ViewChild('card') card!: FlipCardComponent;
@@ -31,7 +32,11 @@ export class GrammarFlashcardsComponent {
     this.resourcesService
       .getGrammar()
       .then((data) => {
-        this.grammarList = data;
+        this.grammarList = [];
+        for (let i = 0; i < this.numOfWords; i++) {
+          let j = Math.floor(Math.random() * data.length);
+          this.grammarList.push(data.splice(j, 1)[0]);
+        }
         this.randomIdxs = this.utilsService.createAndShuffleArray(
           this.grammarList.length
         );
