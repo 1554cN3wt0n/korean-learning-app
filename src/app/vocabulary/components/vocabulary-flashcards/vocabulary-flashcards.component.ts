@@ -18,6 +18,7 @@ export class VocabularyFlashcardsComponent {
   idx!: number;
   loading!: boolean;
   numOfWords: number = 20;
+  finishReview: boolean = false;
 
   @ViewChild('card') card!: FlipCardComponent;
 
@@ -27,6 +28,10 @@ export class VocabularyFlashcardsComponent {
   ) {}
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
     this.loading = true;
     this.resourcesService
       .getWords()
@@ -49,13 +54,21 @@ export class VocabularyFlashcardsComponent {
 
   nextSentence() {
     this.card.isFlipped = false;
+    if (this.randomIdxs.length == 0) {
+      this.finishReview = true;
+      return;
+    }
     this.idx = this.randomIdxs.pop() || 0;
   }
 
   reviewLater() {
     this.card.isFlipped = false;
-    let prevIdx = this.idx;
+    this.randomIdxs = [this.idx, ...this.randomIdxs];
     this.idx = this.randomIdxs.pop() || 0;
-    this.randomIdxs.push(prevIdx);
+  }
+
+  restart() {
+    this.finishReview = false;
+    this.loadData();
   }
 }

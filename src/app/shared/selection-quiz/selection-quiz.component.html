@@ -1,30 +1,36 @@
 <div class="flex flex-col items-center justify-center bg-black-500">
-  <div>Score: {{ this.score }}</div>
-  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-    <h2 class="text-xl font-semibold mb-4 text-center text-black">
-      Question {{ currentQuestionIndex + 1 }}: {{ currentQuestion.question }}
-    </h2>
-
-    <div class="grid grid-cols-2 gap-4">
-      <div
-        *ngFor="let choice of currentQuestion.choices; let i = index"
-        class="text-center"
-      >
-        <button
-          class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 active:bg-blue-700 transition-colors"
-          [ngClass]="{
-            'bg-green-500': selectedAnswer === i && isCorrect,
-            'bg-red-500': selectedAnswer === i && !isCorrect,
-            'cursor-not-allowed pointer-events-none': isAnswered
-          }"
-          [disabled]="isAnswered"
-          (click)="checkAnswer(i)"
-        >
-          {{ choice }}
-        </button>
+  <mat-card class="p-6 w-[90%]">
+    <mat-card-title>
+      <div class="flex grid grid-cols-2">
+        <span> Score: {{ this.score }} </span>
+        <span class="text-end"> Question {{ currentQuestionIndex + 1 }} </span>
       </div>
-    </div>
+    </mat-card-title>
+    <mat-card-content>
+      <h2 class="text-xl font-semibold mb-4 text-center text-white">
+        {{ currentQuestion.question }}
+      </h2>
 
+      <div class="grid grid-cols-2 gap-4">
+        <div
+          *ngFor="let choice of currentQuestion.choices; let i = index"
+          class="text-center"
+        >
+          <button
+            class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 active:bg-blue-700 transition-colors"
+            [ngClass]="{
+              'bg-green-500': selectedAnswer === i && isCorrect,
+              'bg-red-500': selectedAnswer === i && !isCorrect,
+              'cursor-not-allowed pointer-events-none': isAnswered
+            }"
+            [disabled]="isAnswered"
+            (click)="checkAnswer(i)"
+          >
+            {{ choice }}
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
     <div *ngIf="isAnswered" class="mt-4 text-center">
       <button
         class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors"
@@ -33,5 +39,5 @@
         Next Question
       </button>
     </div>
-  </div>
+  </mat-card>
 </div>

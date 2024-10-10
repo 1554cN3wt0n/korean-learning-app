@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Question } from '../../models/question';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-selection-quiz',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule],
   templateUrl: './selection-quiz.component.html',
   styleUrl: './selection-quiz.component.scss',
 })
@@ -13,6 +14,9 @@ export class SelectionQuizComponent {
   score = 0;
   @Input()
   questions: Question[] = [];
+
+  @Output()
+  endOfQuiz: EventEmitter<any> = new EventEmitter();
 
   currentQuestionIndex: number = 0;
   currentQuestion: Question = this.questions[this.currentQuestionIndex];
@@ -46,6 +50,9 @@ export class SelectionQuizComponent {
 
     // If there are no more questions, restart the game (or you can handle it differently)
     if (this.currentQuestionIndex >= this.questions.length) {
+      this.endOfQuiz.emit({
+        score: this.score,
+      });
       this.currentQuestionIndex = 0;
     }
 

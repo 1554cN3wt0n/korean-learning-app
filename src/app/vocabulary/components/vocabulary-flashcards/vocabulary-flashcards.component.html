@@ -1,5 +1,5 @@
 <div *ngIf="!this.loading">
-  <div class="p-1 m-4">
+  <div class="p-1 m-4" *ngIf="!finishReview">
     <div class="text-xl text-bold">
       Reviewed: {{ this.listWords.length - this.randomIdxs.length }}/{{
         this.listWords.length
@@ -19,6 +19,22 @@
       <button (click)="nextSentence()" class="bg-green-500">
         <mat-icon>check</mat-icon>
       </button>
+    </div>
+  </div>
+  <div *ngIf="finishReview" class="h-[60vh] flex">
+    <div class="grid grid-cols-1 justify-center items-center w-[100vw]">
+      <span class="text-2xl text-center">Great🎉!!!</span>
+      <span class="text-xl text-center"
+        >You finish reviewing some words for today!</span
+      >
+      <div class="justify-center flex">
+        <button
+          class="bg-blue-500 rounded-lg border text-xl p-4"
+          (click)="restart()"
+        >
+          Try again?
+        </button>
+      </div>
     </div>
   </div>
   <div class="p-2">

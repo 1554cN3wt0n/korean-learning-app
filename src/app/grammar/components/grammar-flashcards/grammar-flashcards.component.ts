@@ -18,6 +18,7 @@ export class GrammarFlashcardsComponent {
   idx!: number;
   loading: boolean = true;
   numOfWords: number = 20;
+  finishReview: boolean = false;
 
   completedSentences = 0;
   @ViewChild('card') card!: FlipCardComponent;
@@ -28,6 +29,10 @@ export class GrammarFlashcardsComponent {
   ) {}
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
     this.loading = true;
     this.resourcesService
       .getGrammar()
@@ -50,13 +55,21 @@ export class GrammarFlashcardsComponent {
 
   nextSentence() {
     this.card.isFlipped = false;
+    if (this.randomIdxs.length == 0) {
+      this.finishReview = true;
+      return;
+    }
     this.idx = this.randomIdxs.pop() || 0;
   }
 
   reviewLater() {
     this.card.isFlipped = false;
-    let prevIdx = this.idx;
+    this.randomIdxs = [this.idx, ...this.randomIdxs];
     this.idx = this.randomIdxs.pop() || 0;
-    this.randomIdxs.push(prevIdx);
+  }
+
+  restart() {
+    this.finishReview = false;
+    this.loadData();
   }
 }
