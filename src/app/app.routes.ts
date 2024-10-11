@@ -9,6 +9,7 @@ import { VocabularyQuizComponent } from './vocabulary/components/vocabulary-quiz
 import { GrammarQuizComponent } from './grammar/components/grammar-quiz/grammar-quiz.component';
 import { SentencesFlashcardsComponent } from './sentences/components/sentences-flashcards/sentences-flashcards.component';
 import { SentencesQuizComponent } from './sentences/components/sentences-quiz/sentences-quiz.component';
+import { TypingComponent } from './typing/typing.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -45,4 +46,5 @@ export const routes: Routes = [
     component: GrammarQuizComponent,
     pathMatch: 'full',
   },
+  { path: 'typing', component: TypingComponent, pathMatch: 'full' },
 ];

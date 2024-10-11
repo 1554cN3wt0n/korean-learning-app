@@ -1,0 +1,14 @@
+<div>
+  <span class="text-lg font-bold p-2 mb-4 flex"
+    >Let's practice and remember words by typing!</span
+  >
+
+  <div class="flex justify-center">
+    <app-typing-sandbox
+      [sentence]="sentence"
+      [meaning]="meaning"
+      class="md:w-[50%]"
+      (result)="handleResult($event)"
+    ></app-typing-sandbox>
+  </div>
+</div>

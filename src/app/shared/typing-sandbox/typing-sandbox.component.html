@@ -1,0 +1,36 @@
+<div class="grid grid-cols-1 gap-2">
+  <mat-card>
+    <mat-card-content>
+      <div class="grid grid-cols-2">
+        <span class="text-xl font-bold">Try to type:</span>
+        <span class="text-2xl">{{ sentence }}</span>
+      </div>
+      <div class="grid grid-cols-2">
+        <span class="text-xl">Meaning:</span>
+        <span class="text^xl">{{ meaning }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div class="grid grid-cols-4 gap-2">
+    <mat-form-field class="col-span-3">
+      <input
+        matInput
+        [(ngModel)]="inputValue"
+        placeholder="Type here"
+        (keydown.enter)="validate()"
+      />
+    </mat-form-field>
+    <div class="flex">
+      <button mat-button (click)="validate()" class="h-ful">Validate</button>
+    </div>
+  </div>
+  <div
+    *ngIf="showMessage"
+    class="text-green-600 transition-opacity duration-1000 ease-in-out"
+    [class.opacity-100]="messageVisible"
+    [class.opacity-0]="!messageVisible"
+    [ngStyle]="color"
+  >
+    {{ this.message }}
+  </div>
+</div>

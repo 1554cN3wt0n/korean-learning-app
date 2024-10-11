@@ -1,4 +1,7 @@
 <div *ngIf="!this.loading">
+  <div class="p-4 text-xl">
+    <span> What is the meaning of the following words in English? </span>
+  </div>
   <div class="mt-4">
     <app-selection-quiz [questions]="this.questions"></app-selection-quiz>
   </div>

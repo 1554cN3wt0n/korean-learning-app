@@ -46,4 +46,8 @@ export class AppComponent {
     this.router.navigate(['/grammar']);
     this.drawer.toggle();
   }
+  goToTyping() {
+    this.router.navigate(['/typing']);
+    this.drawer.toggle();
+  }
 }
