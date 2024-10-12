@@ -31,11 +31,23 @@
     </mat-list>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="w-full h-[10%] bg-slate-500">
-      <button class="p-2 ml-4 h-full bg-slate-500" (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span class="text-4xl">한국어</span>
+    <div class="w-full h-[10%] bg-slate-500 grid grid-cols-2">
+      <div>
+        <button class="p-2 ml-4 h-full bg-slate-500" (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="text-4xl">한국어</span>
+      </div>
+      <div class="text-end pr-2 items-center">
+        <button class="p-2 ml-4 h-full bg-slate-500">
+          <a
+            class="flex h-[100%] items-center"
+            href="https://github.com/1554cN3wt0n/korean-learning-app"
+          >
+            <mat-icon>code</mat-icon>
+          </a>
+        </button>
+      </div>
     </div>
     <div>
       <router-outlet />
