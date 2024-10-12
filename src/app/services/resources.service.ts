@@ -7,6 +7,7 @@ export class ResourcesService {
   words: any[] = [];
   grammars: any[] = [];
   sentences: any[] = [];
+  analyzedSentences: any = {};
 
   constructor() {}
 
@@ -86,6 +87,27 @@ export class ResourcesService {
       return parsedData;
     } catch (error) {
       console.error('Error fetching or parsing CSV: ', error);
+    }
+  }
+
+  async getAnalyzedSentences(batch: string = '0-999'): Promise<any> {
+    if (batch in this.analyzedSentences) {
+      return this.analyzedSentences[batch];
+    }
+
+    try {
+      const response = await fetch(`/assets/sentences/sentences-${batch}.json`);
+
+      // Check if the request was successful
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      this.analyzedSentences[batch] = response.json();
+
+      return this.analyzedSentences[batch];
+    } catch (error) {
+      console.error('Error fetching ', error);
     }
   }
 
